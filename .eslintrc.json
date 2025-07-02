@@ -1,0 +1,91 @@
+{
+  "root": true,
+  "ignorePatterns": [
+    "projects/**/*"
+  ],
+  "overrides": [
+    {
+      "files": [
+        "*.ts"
+      ],
+      "parserOptions": {
+        "project": [
+          "tsconfig.json"
+        ],
+        "createDefaultProgram": true
+      },
+      "plugins": [
+        "@typescript-eslint",
+        "import"
+      ],
+      "extends": [
+        "eslint:recommended",
+        "plugin:@typescript-eslint/recommended",
+        "plugin:@angular-eslint/recommended",
+        "plugin:@angular-eslint/template/process-inline-templates",
+          // AirBnB Styleguide rules
+        "airbnb-typescript/base",
+        // to avoid import errors
+        // "plugin:import/recommend",
+        "plugin:import/typescript"
+      ],
+      "rules": {
+        "class-methods-use-this": "off",
+        "@typescript-eslint/indent": [
+          "error",
+          2
+        ],
+        "@typescript-eslint/comma-dangle": "off",
+        "@typescript-eslint/lines-between-class-members": "off",
+        "@typescript-eslint/quotes": [
+          "error",
+          "single"
+        ],
+        "@typescript-eslint/no-shadow": "error",
+        "@typescript-eslint/no-explicit-any": "error",
+        "@angular-eslint/directive-selector": [
+          "error",
+          {
+            "type": "attribute",
+            "prefix": "app",
+            "style": "camelCase"
+          }
+        ],
+        "@angular-eslint/component-selector": [
+          "error",
+          {
+            "type": "element",
+            "prefix": "app",
+            "style": "kebab-case"
+          }
+        ]
+      }
+    },
+    {
+      "files": [
+        "*.html"
+      ],
+      "extends": [
+        "plugin:@angular-eslint/template/recommended",
+        "plugin:@angular-eslint/template/accessibility"
+      ],
+      "rules": {}
+    },
+    {
+      "files": [
+        "src/**/*.spec.ts", "src/**/*.d.ts"
+      ],
+      "parserOptions": {
+        "project": "./tsconfig.spec.json"
+      },
+      "extends": [
+        "plugin:jasmine/recommended"
+      ],
+      "plugins": [
+        "jasmine"
+      ],
+      "env": { "jasmine": true },
+      "rules": {}
+    }
+  ]
+}
