@@ -29,10 +29,13 @@
       ],
       "rules": {
         "class-methods-use-this": "off",
-        "@typescript-eslint/indent": [
-          "error",
-          2
-        ],
+        "comma-dangle": ["error", {
+          "arrays": "always-multiline",
+          "objects": "always-multiline",
+          "imports": "always-multiline",
+          "exports": "always-multiline",
+          "functions": "never"
+        }],
         "@typescript-eslint/comma-dangle": "off",
         "@typescript-eslint/lines-between-class-members": "off",
         "@typescript-eslint/quotes": [
