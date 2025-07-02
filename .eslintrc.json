@@ -23,10 +23,7 @@
         "plugin:@typescript-eslint/recommended",
         "plugin:@angular-eslint/recommended",
         "plugin:@angular-eslint/template/process-inline-templates",
-          // AirBnB Styleguide rules
         "airbnb-typescript/base",
-        // to avoid import errors
-        // "plugin:import/recommend",
         "plugin:import/typescript"
       ],
       "rules": {
