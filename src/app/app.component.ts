@@ -2,11 +2,12 @@ import { Component, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { CowComponent } from './components/cow/cow.component';
+import { CellComponent } from './components/cell/cell.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, CowComponent],
+  imports: [CommonModule, RouterOutlet, CowComponent, CellComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
@@ -52,7 +53,7 @@ export class AppComponent {
         this.cowX = Math.max(0, this.cowX - 1);
         break;
       case 'right':
-        this.cowX = Math.min(8, this.cowX + 1);
+        this.cowX = Math.min(14, this.cowX + 1);
         break;
     }
   }

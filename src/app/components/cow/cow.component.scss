@@ -1,8 +1,11 @@
 .cow {
-  width: 64px;
-  height: 64px;
-  background-image: url(/assets/cow_walk.png);
-  background-size: 256px 256px;
   position: absolute;
+  top: 0;
+  left: 0;
+  width: var(--cell-size);
+  height: var(--cell-size);
+  background-image: url(/assets/cow_walk.png);
+  background-size: calc(var(--cow-width) * var(--cell-size))
+    calc(var(--cow-height) * var(--cell-size));
   transition: transform 0.5s ease-in;
 }
