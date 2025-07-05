@@ -1,0 +1,13 @@
+.board {
+  position: relative;
+  width: 576px; /* 9 * 64 */
+  height: 576px;
+  border: 2px solid black;
+  margin-bottom: 10px;
+  background-color: #ccffcc;
+}
+
+.controls button {
+  font-size: 24px;
+  margin: 5px;
+}

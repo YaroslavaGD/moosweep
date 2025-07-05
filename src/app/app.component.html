@@ -1,3 +1,12 @@
 <main>
+  <div class="board">
+    <app-cow [x]="cowX" [y]="cowY" [direction]="direction"></app-cow>
+  </div>
+  <div class="controls">
+    <button (click)="move('up')">⬆️</button>
+    <button (click)="move('down')">⬇️</button>
+    <button (click)="move('left')">⬅️</button>
+    <button (click)="move('right')">➡️</button>
+  </div>
   <router-outlet></router-outlet>
 </main>
