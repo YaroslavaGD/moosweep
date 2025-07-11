@@ -2,8 +2,8 @@ import { Component, HostListener, inject } from '@angular/core';
 import { CowComponent } from '../cow/cow.component';
 import { CellComponent } from '../cell/cell.component';
 import { CommonModule } from '@angular/common';
-import { GRID_SIZE } from '../../constants';
-import { BoardService, Direction } from '../../services/board.service';
+import { Direction } from '../../constants/game.constants';
+import { BoardService } from '../../services/board.service';
 import { toSignal } from '@angular/core/rxjs-interop';
 @Component({
   selector: 'app-board',
@@ -15,9 +15,7 @@ import { toSignal } from '@angular/core/rxjs-interop';
 export class BoardComponent {
   readonly boardService = inject(BoardService);
 
-  cellCount = GRID_SIZE.ROW * GRID_SIZE.COLUMN;
-
-  readonly cells = Array.from({ length: this.cellCount });
+  readonly cells = this.boardService.cells;
   readonly playerPosition = toSignal(this.boardService.playerPosition$);
   readonly direction = toSignal(this.boardService.direction$);
 

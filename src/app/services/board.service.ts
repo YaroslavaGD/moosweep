@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
-import { GRID_SIZE } from '../constants';
+import { Direction, GRID_SIZE } from '../constants/game.constants';
 import { BehaviorSubject } from 'rxjs';
-
-export type Direction = 'up' | 'down' | 'left' | 'right';
 
 @Injectable({
   providedIn: 'root',
@@ -14,12 +12,9 @@ export class BoardService {
     y: 0,
   });
   readonly playerPosition$ = this._playerPosition.asObservable();
-  cowX = 0;
-  cowY = 0;
 
   private _direction = new BehaviorSubject<Direction>('down');
   readonly direction$ = this._direction.asObservable();
-  direction: 'up' | 'down' | 'left' | 'right' = 'down';
 
   readonly cells = Array.from({ length: this.gridSize });
 
@@ -44,5 +39,6 @@ export class BoardService {
     }
 
     this._playerPosition.next({ x, y });
+    this._direction.next(dir);
   }
 }

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { GRASS_SPRITE_SIZE, TILE_SIZE } from '../../constants';
+import { GRASS_SPRITE_SIZE, TILE_SIZE } from '../../constants/game.constants';
 
 @Component({
   selector: 'app-cell',

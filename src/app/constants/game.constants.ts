@@ -8,3 +8,5 @@ export const GRASS_SPRITE_SIZE = {
   COLUMN: 11,
 };
 export const COW_FRAME_NUMBER = 4;
+
+export type Direction = 'up' | 'down' | 'left' | 'right';

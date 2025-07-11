@@ -7,8 +7,11 @@ import {
   OnChanges,
   SimpleChanges,
 } from '@angular/core';
-import { COW_FRAME_NUMBER, TILE_SIZE } from '../../constants';
-
+import {
+  COW_FRAME_NUMBER,
+  Direction,
+  TILE_SIZE,
+} from '../../constants/game.constants';
 @Component({
   selector: 'app-cow',
   standalone: true,
@@ -18,7 +21,7 @@ import { COW_FRAME_NUMBER, TILE_SIZE } from '../../constants';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CowComponent implements OnChanges {
-  @Input() direction: 'up' | 'down' | 'left' | 'right' = 'down';
+  @Input() direction: Direction = 'down';
   @Input() x: number = 0;
   @Input() y: number = 0;
 
@@ -43,6 +46,10 @@ export class CowComponent implements OnChanges {
     return `-${x}px -${y}px`;
   }
 
+  get transform(): string {
+    return `translate(${this.x * TILE_SIZE}px, ${this.y * TILE_SIZE}px)`;
+  }
+
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['x'] || changes['y'] || changes['direction']) {
       this.animateWalk();
@@ -57,7 +64,7 @@ export class CowComponent implements OnChanges {
           this.frame = (this.frame + 1) % COW_FRAME_NUMBER;
           this.cdr.markForCheck();
           step++;
-          if (step >= 4) clearInterval(interval);
+          if (step >= COW_FRAME_NUMBER) clearInterval(interval);
         });
       }, 100);
     });
