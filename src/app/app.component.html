@@ -1,21 +1,4 @@
 <main>
-  <div class="board">
-    <app-cell></app-cell>
-    <app-cell></app-cell>
-    <app-cell></app-cell>
-    <app-cell></app-cell>
-    <app-cell></app-cell>
-    <app-cell></app-cell>
-    <app-cell></app-cell>
-    <app-cell></app-cell>
-    <app-cell></app-cell>
-    <app-cow [x]="cowX" [y]="cowY" [direction]="direction"></app-cow>
-  </div>
-  <div class="controls">
-    <button (click)="move('up')">⬆️</button>
-    <button (click)="move('down')">⬇️</button>
-    <button (click)="move('left')">⬅️</button>
-    <button (click)="move('right')">➡️</button>
-  </div>
+  <app-board></app-board>
   <router-outlet></router-outlet>
 </main>
