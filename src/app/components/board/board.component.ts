@@ -1,9 +1,10 @@
-import { Component, HostListener } from '@angular/core';
+import { Component, HostListener, inject } from '@angular/core';
 import { CowComponent } from '../cow/cow.component';
 import { CellComponent } from '../cell/cell.component';
 import { CommonModule } from '@angular/common';
 import { GRID_SIZE } from '../../constants';
-
+import { BoardService, Direction } from '../../services/board.service';
+import { toSignal } from '@angular/core/rxjs-interop';
 @Component({
   selector: 'app-board',
   standalone: true,
@@ -12,53 +13,27 @@ import { GRID_SIZE } from '../../constants';
   styleUrl: './board.component.scss',
 })
 export class BoardComponent {
-  title = 'moosweep';
-  cowX = 0;
-  cowY = 0;
-  direction: 'up' | 'down' | 'left' | 'right' = 'down';
+  readonly boardService = inject(BoardService);
 
   cellCount = GRID_SIZE.ROW * GRID_SIZE.COLUMN;
 
   readonly cells = Array.from({ length: this.cellCount });
+  readonly playerPosition = toSignal(this.boardService.playerPosition$);
+  readonly direction = toSignal(this.boardService.direction$);
 
   @HostListener('window:keydown', ['$event'])
   handleKeyDown(event: KeyboardEvent) {
-    const key = event.key;
-    if (['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(key)) {
+    const keyMap: Record<string, Direction> = {
+      ArrowUp: 'up',
+      ArrowDown: 'down',
+      ArrowLeft: 'left',
+      ArrowRight: 'right',
+    };
+    const dir = keyMap[event.key];
+
+    if (dir) {
       event.preventDefault();
-      switch (event.key) {
-        case 'ArrowUp':
-          this.move('up');
-          break;
-        case 'ArrowDown':
-          this.move('down');
-          break;
-        case 'ArrowLeft':
-          this.move('left');
-          break;
-        case 'ArrowRight':
-          this.move('right');
-          break;
-      }
-    }
-  }
-
-  move(dir: 'up' | 'down' | 'left' | 'right') {
-    this.direction = dir;
-
-    switch (dir) {
-      case 'up':
-        this.cowY = Math.max(0, this.cowY - 1);
-        break;
-      case 'down':
-        this.cowY = Math.min(GRID_SIZE.ROW - 1, this.cowY + 1);
-        break;
-      case 'left':
-        this.cowX = Math.max(0, this.cowX - 1);
-        break;
-      case 'right':
-        this.cowX = Math.min(GRID_SIZE.COLUMN - 1, this.cowX + 1);
-        break;
+      this.boardService.move(dir);
     }
   }
 }

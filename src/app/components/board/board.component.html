@@ -2,11 +2,15 @@
   <div class="field">
     <app-cell *ngFor="let _ of cells"></app-cell>
   </div>
-  <app-cow [x]="cowX" [y]="cowY" [direction]="direction"></app-cow>
+  <app-cow
+    [x]="playerPosition()!.x"
+    [y]="playerPosition()!.y"
+    [direction]="direction()!"
+  ></app-cow>
 </div>
 <div class="controls">
-  <button (click)="move('up')">⬆️</button>
-  <button (click)="move('down')">⬇️</button>
-  <button (click)="move('left')">⬅️</button>
-  <button (click)="move('right')">➡️</button>
+  <button (click)="boardService.move('up')">⬆️</button>
+  <button (click)="boardService.move('down')">⬇️</button>
+  <button (click)="boardService.move('left')">⬅️</button>
+  <button (click)="boardService.move('right')">➡️</button>
 </div>
