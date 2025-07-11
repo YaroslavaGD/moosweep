@@ -10,3 +10,10 @@
   font-size: 24px;
   margin: 5px;
 }
+
+.field {
+  display: grid;
+  grid-template-columns: repeat(var(--board-width), var(--cell-size));
+  grid-template-rows: repeat(var(--board-height), var(--cell-size));
+  gap: 0;
+}

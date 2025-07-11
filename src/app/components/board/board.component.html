@@ -1,5 +1,7 @@
 <div class="board">
-  <app-cell *ngFor="let _ of cells"></app-cell>
+  <div class="field">
+    <app-cell *ngFor="let _ of cells"></app-cell>
+  </div>
   <app-cow [x]="cowX" [y]="cowY" [direction]="direction"></app-cow>
 </div>
 <div class="controls">
