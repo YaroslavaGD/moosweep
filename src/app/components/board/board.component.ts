@@ -2,6 +2,7 @@ import { Component, HostListener } from '@angular/core';
 import { CowComponent } from '../cow/cow.component';
 import { CellComponent } from '../cell/cell.component';
 import { CommonModule } from '@angular/common';
+import { GRID_SIZE } from '../../constants';
 
 @Component({
   selector: 'app-board',
@@ -16,7 +17,7 @@ export class BoardComponent {
   cowY = 0;
   direction: 'up' | 'down' | 'left' | 'right' = 'down';
 
-  cellCount = 9;
+  cellCount = GRID_SIZE.ROW * GRID_SIZE.COLUMN;
 
   readonly cells = Array.from({ length: this.cellCount });
 
@@ -50,13 +51,13 @@ export class BoardComponent {
         this.cowY = Math.max(0, this.cowY - 1);
         break;
       case 'down':
-        this.cowY = Math.min(8, this.cowY + 1);
+        this.cowY = Math.min(GRID_SIZE.ROW - 1, this.cowY + 1);
         break;
       case 'left':
         this.cowX = Math.max(0, this.cowX - 1);
         break;
       case 'right':
-        this.cowX = Math.min(14, this.cowX + 1);
+        this.cowX = Math.min(GRID_SIZE.COLUMN - 1, this.cowX + 1);
         break;
     }
   }

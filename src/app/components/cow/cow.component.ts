@@ -7,6 +7,7 @@ import {
   OnChanges,
   SimpleChanges,
 } from '@angular/core';
+import { COW_FRAME_NUMBER, TILE_SIZE } from '../../constants';
 
 @Component({
   selector: 'app-cow',
@@ -37,8 +38,8 @@ export class CowComponent implements OnChanges {
 
   get backgroundPosition(): string {
     const row = this.directionMap[this.direction];
-    const x = this.frame * 64;
-    const y = row * 64;
+    const x = this.frame * TILE_SIZE;
+    const y = row * TILE_SIZE;
     return `-${x}px -${y}px`;
   }
 
@@ -53,7 +54,7 @@ export class CowComponent implements OnChanges {
     this.ngZone.runOutsideAngular(() => {
       const interval = setInterval(() => {
         this.ngZone.run(() => {
-          this.frame = (this.frame + 1) % 4;
+          this.frame = (this.frame + 1) % COW_FRAME_NUMBER;
           this.cdr.markForCheck();
           step++;
           if (step >= 4) clearInterval(interval);

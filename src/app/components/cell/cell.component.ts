@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { GRASS_SPRITE_SIZE, TILE_SIZE } from '../../constants';
 
 @Component({
   selector: 'app-cell',
@@ -8,10 +9,10 @@ import { Component } from '@angular/core';
   styleUrl: './cell.component.scss',
 })
 export class CellComponent {
-  row = Math.floor(Math.random() * 5);
-  column = Math.floor(Math.random() * 11);
-  x = this.column * 64;
-  y = this.row * 64;
+  row = Math.floor(Math.random() * GRASS_SPRITE_SIZE.ROW);
+  column = Math.floor(Math.random() * GRASS_SPRITE_SIZE.COLUMN);
+  x = this.column * TILE_SIZE;
+  y = this.row * TILE_SIZE;
 
   get backgroundPosition(): string {
     return `-${this.x}px -${this.y}px`;
