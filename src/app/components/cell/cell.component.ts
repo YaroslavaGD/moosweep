@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { GRASS_SPRITE_SIZE, TILE_SIZE } from '../../constants/game.constants';
+import { Cell } from '../../models/cell.model';
 
 @Component({
   selector: 'app-cell',
@@ -9,6 +10,8 @@ import { GRASS_SPRITE_SIZE, TILE_SIZE } from '../../constants/game.constants';
   styleUrl: './cell.component.scss',
 })
 export class CellComponent {
+  @Input({ required: true }) cell!: Cell;
+
   row = Math.floor(Math.random() * GRASS_SPRITE_SIZE.ROW);
   column = Math.floor(Math.random() * GRASS_SPRITE_SIZE.COLUMN);
   x = this.column * TILE_SIZE;
@@ -16,5 +19,12 @@ export class CellComponent {
 
   get backgroundPosition(): string {
     return `-${this.x}px -${this.y}px`;
+  }
+
+  get displayContent(): string {
+    if (this.cell.hasMine) {
+      return '💥';
+    }
+    return '';
   }
 }

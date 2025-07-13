@@ -1,1 +1,7 @@
-<div class="cell" [style.background-position]="backgroundPosition"></div>
+<div
+  class="cell"
+  [class.mine]="cell.hasMine"
+  [style.background-position]="backgroundPosition"
+>
+  <span class="content">{{ displayContent }}</span>
+</div>

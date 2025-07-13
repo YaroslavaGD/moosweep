@@ -3,3 +3,11 @@
   height: var(--cell-size);
   background-image: url(/assets/grass.png);
 }
+
+.cell.mine {
+  background-color: brown;
+}
+
+.content {
+  pointer-events: none;
+}

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Direction, GRID_SIZE } from '../constants/game.constants';
 import { BehaviorSubject } from 'rxjs';
+import { Cell } from '../models/cell.model';
 
 @Injectable({
   providedIn: 'root',
@@ -16,10 +17,62 @@ export class BoardService {
   private _direction = new BehaviorSubject<Direction>('down');
   readonly direction$ = this._direction.asObservable();
 
-  readonly cells = Array.from({ length: this.gridSize });
+  readonly cells: Cell[] = [];
+
+  constructor() {
+    this.generateCells();
+  }
+
+  private generateCells() {
+    const width = GRID_SIZE.COLUMN;
+    const height = GRID_SIZE.ROW;
+
+    for (let y = 0; y < height; y++) {
+      for (let x = 0; x < width; x++) {
+        this.cells.push({
+          x,
+          y,
+          hasMine: false,
+          revealed: false,
+        });
+      }
+    }
+
+    for (let blockY = 0; blockY < height; blockY += GRID_SIZE.BLOCK) {
+      for (let blockX = 0; blockX < width; blockX += GRID_SIZE.BLOCK) {
+        this.placeMineInBlock(blockX, blockY);
+      }
+    }
+  }
+
+  private placeMineInBlock(startX: number, startY: number) {
+    const candidates: Cell[] = [];
+
+    for (let dy = 0; dy < GRID_SIZE.BLOCK; dy++) {
+      for (let dx = 0; dx < GRID_SIZE.BLOCK; dx++) {
+        const x = startX + dx;
+        const y = startY + dy;
+
+        if (x >= GRID_SIZE.COLUMN || y >= GRID_SIZE.ROW) continue;
+
+        if (x === 0 && y === 0) continue;
+
+        const cell = this.getCell(x, y);
+        if (cell) candidates.push(cell);
+      }
+    }
+
+    if (candidates.length > 0) {
+      const randomIndex = Math.floor(Math.random() * candidates.length);
+      candidates[randomIndex].hasMine = true;
+    }
+  }
+
+  getCell(x: number, y: number): Cell | undefined {
+    return this.cells.find((cell) => cell.x === x && cell.y === y);
+  }
 
   move(dir: Direction) {
-    this._direction.next(dir);
     const pos = this._playerPosition.value;
     let { x, y } = pos;
 
@@ -40,5 +93,26 @@ export class BoardService {
 
     this._playerPosition.next({ x, y });
     this._direction.next(dir);
+
+    this.revealCell(x, y);
+  }
+
+  private revealCell(x: number, y: number) {
+    const cell = this.getCell(x, y);
+    if (!cell) return;
+
+    cell.revealed = true;
+
+    if (cell.hasMine) {
+      alert('ФУ! Коровка на мине!');
+      this.resetGame();
+    }
+  }
+
+  resetGame() {
+    this.cells.length = 0;
+    this._playerPosition.next({ x: 0, y: 0 });
+    this._direction.next('down');
+    this.generateCells();
   }
 }
