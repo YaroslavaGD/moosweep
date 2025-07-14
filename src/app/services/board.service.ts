@@ -20,6 +20,8 @@ export class BoardService {
   });
   readonly playerPosition$ = this._playerPosition.asObservable();
 
+  private isMoving = false;
+
   private _direction = new BehaviorSubject<Direction>('down');
   readonly direction$ = this._direction.asObservable();
 
@@ -122,6 +124,8 @@ export class BoardService {
   }
 
   move(dir: Direction) {
+    if (this.isMoving) return;
+
     const pos = this._playerPosition.value;
     let { x, y } = pos;
 
@@ -140,6 +144,11 @@ export class BoardService {
         break;
     }
 
+    this.isMoving = true;
+    setTimeout(() => {
+      this.isMoving = false;
+    }, 400);
+
     this._playerPosition.next({ x, y });
     this._direction.next(dir);
 
@@ -153,9 +162,11 @@ export class BoardService {
     cell.revealed = true;
 
     if (cell.hasMine) {
-      alert('ФУ! Коровка на мине!');
-      this.resetGame();
-      return;
+      setTimeout(() => {
+        alert('ФУ! Коровка на мине!');
+        this.resetGame();
+        return;
+      }, 500);
     }
 
     const smell = this.getSmell(x, y);
