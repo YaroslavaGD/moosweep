@@ -3,4 +3,6 @@ export interface Cell {
   y: number;
   hasMine: boolean;
   revealed: boolean;
+  smell?: number;
+  flagged?: boolean;
 }

@@ -17,35 +17,41 @@ export class BoardService {
   private _direction = new BehaviorSubject<Direction>('down');
   readonly direction$ = this._direction.asObservable();
 
-  readonly cells: Cell[] = [];
+  // readonly cells: Cell[] = [];
+  private _cells = new BehaviorSubject<Cell[]>([]);
+  readonly cells$ = this._cells.asObservable();
 
   constructor() {
     this.generateCells();
   }
 
   private generateCells() {
+    const cells: Cell[] = [];
     const width = GRID_SIZE.COLUMN;
     const height = GRID_SIZE.ROW;
 
     for (let y = 0; y < height; y++) {
       for (let x = 0; x < width; x++) {
-        this.cells.push({
+        cells.push({
           x,
           y,
           hasMine: false,
           revealed: false,
+          flagged: false,
         });
       }
     }
 
     for (let blockY = 0; blockY < height; blockY += GRID_SIZE.BLOCK) {
       for (let blockX = 0; blockX < width; blockX += GRID_SIZE.BLOCK) {
-        this.placeMineInBlock(blockX, blockY);
+        this.placeMineInBlock(blockX, blockY, cells);
       }
     }
+
+    this._cells.next(cells);
   }
 
-  private placeMineInBlock(startX: number, startY: number) {
+  private placeMineInBlock(startX: number, startY: number, cells: Cell[]) {
     const candidates: Cell[] = [];
 
     for (let dy = 0; dy < GRID_SIZE.BLOCK; dy++) {
@@ -57,7 +63,7 @@ export class BoardService {
 
         if (x === 0 && y === 0) continue;
 
-        const cell = this.getCell(x, y);
+        const cell = cells.find((c) => c.x === x && c.y === y);
         if (cell) candidates.push(cell);
       }
     }
@@ -69,7 +75,15 @@ export class BoardService {
   }
 
   getCell(x: number, y: number): Cell | undefined {
-    return this.cells.find((cell) => cell.x === x && cell.y === y);
+    return this._cells.value.find((cell) => cell.x === x && cell.y === y);
+  }
+
+  private updateCell(x: number, y: number, updater: (cell: Cell) => Cell) {
+    const updatedCells = this._cells.value.map((cell) => {
+      return cell.x === x && cell.y === y ? updater(cell) : cell;
+    });
+
+    this._cells.next(updatedCells);
   }
 
   move(dir: Direction) {
@@ -106,11 +120,51 @@ export class BoardService {
     if (cell.hasMine) {
       alert('ФУ! Коровка на мине!');
       this.resetGame();
+      return;
     }
+
+    const smell = this.getSmell(x, y);
+
+    this.updateCell(x, y, (c) => ({
+      ...c,
+      revealed: true,
+      smell,
+    }));
+  }
+
+  getSmell(x: number, y: number): number {
+    return this.getNeighbors(x, y).filter((cell) => cell.hasMine).length;
+  }
+
+  getNeighbors(x: number, y: number): Cell[] {
+    const neighbors: Cell[] = [];
+
+    for (let dy = -1; dy <= 1; dy++) {
+      for (let dx = -1; dx <= 1; dx++) {
+        if (dx === 0 && dy === 0) continue;
+
+        const nx = x + dx;
+        const ny = y + dy;
+
+        if (nx < 0 || ny < 0 || nx >= GRID_SIZE.COLUMN || ny >= GRID_SIZE.ROW)
+          continue;
+
+        const neighbor = this.getCell(nx, ny);
+        if (neighbor) neighbors.push(neighbor);
+      }
+    }
+
+    return neighbors;
+  }
+
+  flagCell(x: number, y: number) {
+    this.updateCell(x, y, (cell) => ({
+      ...cell,
+      flagged: !cell.flagged,
+    }));
   }
 
   resetGame() {
-    this.cells.length = 0;
     this._playerPosition.next({ x: 0, y: 0 });
     this._direction.next('down');
     this.generateCells();
