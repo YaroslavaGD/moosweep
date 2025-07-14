@@ -1,5 +1,4 @@
 import { Component, HostListener, inject, Input } from '@angular/core';
-import { GRASS_SPRITE_SIZE, TILE_SIZE } from '../../constants/game.constants';
 import { Cell } from '../../models/cell.model';
 import { BoardService } from '../../services/board.service';
 
@@ -15,13 +14,8 @@ export class CellComponent {
 
   private readonly boardService = inject(BoardService);
 
-  row = Math.floor(Math.random() * GRASS_SPRITE_SIZE.ROW);
-  column = Math.floor(Math.random() * GRASS_SPRITE_SIZE.COLUMN);
-  x = this.column * TILE_SIZE;
-  y = this.row * TILE_SIZE;
-
   get backgroundPosition(): string {
-    return `-${this.x}px -${this.y}px`;
+    return `-${this.cell.spriteX}px -${this.cell.spriteY}px`;
   }
 
   get displayContent(): string {

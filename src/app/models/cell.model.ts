@@ -5,4 +5,6 @@ export interface Cell {
   revealed: boolean;
   smell?: number;
   flagged?: boolean;
+  spriteX: number;
+  spriteY: number;
 }

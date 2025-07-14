@@ -1,5 +1,10 @@
 import { Injectable } from '@angular/core';
-import { Direction, GRID_SIZE } from '../constants/game.constants';
+import {
+  Direction,
+  GRASS_SPRITE_SIZE,
+  GRID_SIZE,
+  TILE_SIZE,
+} from '../constants/game.constants';
 import { BehaviorSubject } from 'rxjs';
 import { Cell } from '../models/cell.model';
 
@@ -7,6 +12,7 @@ import { Cell } from '../models/cell.model';
   providedIn: 'root',
 })
 export class BoardService {
+  private spriteSeed = Math.floor(Math.random() * 10000000);
   readonly gridSize = GRID_SIZE.ROW * GRID_SIZE.COLUMN;
   private _playerPosition = new BehaviorSubject<{ x: number; y: number }>({
     x: 0,
@@ -17,7 +23,6 @@ export class BoardService {
   private _direction = new BehaviorSubject<Direction>('down');
   readonly direction$ = this._direction.asObservable();
 
-  // readonly cells: Cell[] = [];
   private _cells = new BehaviorSubject<Cell[]>([]);
   readonly cells$ = this._cells.asObservable();
 
@@ -32,12 +37,16 @@ export class BoardService {
 
     for (let y = 0; y < height; y++) {
       for (let x = 0; x < width; x++) {
+        const { spriteX, spriteY } = this.generateSprite(x, y);
+
         cells.push({
           x,
           y,
           hasMine: false,
           revealed: false,
           flagged: false,
+          spriteX,
+          spriteY,
         });
       }
     }
@@ -49,6 +58,32 @@ export class BoardService {
     }
 
     this._cells.next(cells);
+  }
+
+  private generateSprite(
+    x: number,
+    y: number
+  ): { spriteX: number; spriteY: number } {
+    const row = this.pseudoHash(x + this.spriteSeed, y, GRASS_SPRITE_SIZE.ROW);
+    const col = this.pseudoHash(
+      y + this.spriteSeed,
+      x,
+      GRASS_SPRITE_SIZE.COLUMN
+    );
+
+    return {
+      spriteX: col * TILE_SIZE,
+      spriteY: row * TILE_SIZE,
+    };
+  }
+
+  private pseudoHash(x: number, y: number, max: number) {
+    const A = 73856093;
+    const B = 19349663;
+
+    const hash = (x * A) ^ (y * B);
+
+    return Math.abs(hash) % max;
   }
 
   private placeMineInBlock(startX: number, startY: number, cells: Cell[]) {
@@ -167,6 +202,7 @@ export class BoardService {
   resetGame() {
     this._playerPosition.next({ x: 0, y: 0 });
     this._direction.next('down');
+    this.spriteSeed = Math.floor(Math.random() * 10000000);
     this.generateCells();
   }
 }
