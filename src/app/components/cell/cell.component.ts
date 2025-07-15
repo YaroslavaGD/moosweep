@@ -1,6 +1,13 @@
 import { Component, HostListener, inject, Input } from '@angular/core';
 import { Cell } from '../../models/cell.model';
 import { BoardService } from '../../services/board.service';
+import {
+  trigger,
+  state,
+  style,
+  animate,
+  transition,
+} from '@angular/animations';
 
 @Component({
   selector: 'app-cell',
@@ -8,6 +15,23 @@ import { BoardService } from '../../services/board.service';
   imports: [],
   templateUrl: './cell.component.html',
   styleUrl: './cell.component.scss',
+  animations: [
+    trigger('revealEffect', [
+      state(
+        'hidden',
+        style({
+          filter: 'brightness(1) sepia(0)',
+        })
+      ),
+      state(
+        'revealed',
+        style({
+          filter: 'brightness(1) sepia(0.3)',
+        })
+      ),
+      transition('hidden => revealed', animate('700ms ease')),
+    ]),
+  ],
 })
 export class CellComponent {
   @Input({ required: true }) cell!: Cell;
@@ -26,7 +50,9 @@ export class CellComponent {
     if (this.cell.hasMine) {
       return '💥';
     }
-    return this.cell.smell ? this.cell.smell.toString() : '';
+    return this.cell.smell && this.cell.revealed
+      ? this.cell.smell.toString()
+      : '';
   }
 
   @HostListener('contextmenu', ['$event'])
@@ -34,7 +60,7 @@ export class CellComponent {
     event.preventDefault();
 
     this.boardService.flagCell(this.cell.x, this.cell.y);
-    // if (this.cell.revealed) {
+    // if (!this.cell.revealed) {
     this.cell.flagged = !this.cell.flagged;
     // }
   }

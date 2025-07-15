@@ -1,3 +1,9 @@
+<div class="state">
+  <span>GRASS COUNTER:</span>
+  <span>{{ currentGrass() }}</span>
+  /
+  <span>{{ totalGrass }}</span>
+</div>
 <div class="board">
   <div class="field">
     <app-cell *ngFor="let cell of cells()" [cell]="cell"></app-cell>

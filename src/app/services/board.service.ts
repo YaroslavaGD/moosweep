@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {
   Direction,
+  GRASS_NUMBER,
   GRASS_SPRITE_SIZE,
   GRID_SIZE,
   TILE_SIZE,
@@ -27,6 +28,9 @@ export class BoardService {
 
   private _cells = new BehaviorSubject<Cell[]>([]);
   readonly cells$ = this._cells.asObservable();
+
+  private _revealedNumber = new BehaviorSubject<number>(0);
+  readonly revealedNumber$ = this._revealedNumber.asObservable();
 
   constructor() {
     this.generateCells();
@@ -127,8 +131,8 @@ export class BoardService {
   move(dir: Direction) {
     if (this.isMoving) return;
 
-    const pos = this._playerPosition.value;
-    let { x, y } = pos;
+    const prevPos = this._playerPosition.value;
+    let { x, y } = prevPos;
 
     switch (dir) {
       case 'up':
@@ -154,13 +158,31 @@ export class BoardService {
     this._direction.next(dir);
 
     this.revealCell(x, y);
+    this.updateCell(prevPos.x, prevPos.y, (c) => ({
+      ...c,
+      revealed: true,
+      smell: 0,
+    }));
   }
 
   private revealCell(x: number, y: number) {
     const cell = this.getCell(x, y);
     if (!cell) return;
 
+    const wasRevealed = cell.revealed;
     cell.revealed = true;
+
+    if (!wasRevealed) {
+      this._revealedNumber.next(this._revealedNumber.value + 1);
+    }
+
+    if (this._revealedNumber.value === GRASS_NUMBER) {
+      setTimeout(() => {
+        alert('КОНЕЦ');
+        this.resetGame();
+        return;
+      }, 500);
+    }
 
     if (cell.hasMine) {
       setTimeout(() => {
@@ -214,6 +236,7 @@ export class BoardService {
   resetGame() {
     this._playerPosition.next({ x: 0, y: 0 });
     this._direction.next('down');
+    this._revealedNumber.next(0);
     this.spriteSeed = Math.floor(Math.random() * 10000000);
     this.generateCells();
   }

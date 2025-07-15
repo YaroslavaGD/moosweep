@@ -2,7 +2,7 @@ import { Component, HostListener, inject } from '@angular/core';
 import { CowComponent } from '../cow/cow.component';
 import { CellComponent } from '../cell/cell.component';
 import { CommonModule } from '@angular/common';
-import { Direction } from '../../constants/game.constants';
+import { Direction, GRASS_NUMBER } from '../../constants/game.constants';
 import { BoardService } from '../../services/board.service';
 import { toSignal } from '@angular/core/rxjs-interop';
 @Component({
@@ -18,6 +18,8 @@ export class BoardComponent {
   readonly cells = toSignal(this.boardService.cells$);
   readonly playerPosition = toSignal(this.boardService.playerPosition$);
   readonly direction = toSignal(this.boardService.direction$);
+  readonly currentGrass = toSignal(this.boardService.revealedNumber$);
+  readonly totalGrass = GRASS_NUMBER;
 
   @HostListener('window:keydown', ['$event'])
   handleKeyDown(event: KeyboardEvent) {

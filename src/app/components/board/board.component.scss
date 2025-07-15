@@ -2,13 +2,29 @@
   position: relative;
   width: calc(var(--board-width) * var(--cell-size)); /* 15 * 64 */
   height: calc(var(--board-height) * var(--cell-size)); /* 9 * 64 */
-  margin-bottom: 10px;
   background-color: var(--board-color);
+}
+
+.controls {
+  color: #fff;
+  padding: 10px;
+  width: calc(var(--board-width) * var(--cell-size));
+  background-color: var(--board-color);
+  text-align: center;
 }
 
 .controls button {
   font-size: 24px;
   margin: 5px;
+  background-color: unset;
+}
+
+.state {
+  color: #fff;
+  padding: 15px 10px 10px;
+  width: calc(var(--board-width) * var(--cell-size));
+  background-color: var(--board-color);
+  text-align: center;
 }
 
 .field {

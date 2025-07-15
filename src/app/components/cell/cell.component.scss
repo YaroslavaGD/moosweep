@@ -10,7 +10,7 @@
 
 .cell.revealed {
   background-image: url(/assets/grass_yellow.png);
-  filter: brightness(0.75) sepia(0.3);
+  // filter: brightness(0.75) sepia(0.3);
 }
 
 .cell.mine {
@@ -19,4 +19,6 @@
 
 .content {
   pointer-events: none;
+  color: #fff;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
