@@ -1,6 +1,7 @@
 <div
   class="cell"
   [class.mine]="cell.hasMine"
+  [class.revealed]="cell.revealed"
   [style.background-position]="backgroundPosition"
 >
   <span class="content">{{ displayContent }}</span>

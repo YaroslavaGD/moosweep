@@ -60,6 +60,7 @@ export class BoardService {
     }
 
     this._cells.next(cells);
+    this.revealCell(0, 0);
   }
 
   private generateSprite(

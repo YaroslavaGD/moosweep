@@ -2,6 +2,15 @@
   width: var(--cell-size);
   height: var(--cell-size);
   background-image: url(/assets/grass.png);
+  position: relative;
+  overflow: hidden;
+  transition: filter 0.5s ease;
+  filter: brightness(1) sepia(0);
+}
+
+.cell.revealed {
+  background-image: url(/assets/grass_yellow.png);
+  filter: brightness(0.75) sepia(0.3);
 }
 
 .cell.mine {
