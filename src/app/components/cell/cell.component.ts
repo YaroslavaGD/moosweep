@@ -47,9 +47,9 @@ export class CellComponent {
       return '💩';
     }
 
-    if (this.cell.hasMine) {
-      return '💥';
-    }
+    // if (this.cell.hasMine) {
+    //   return '💥';
+    // }
     return this.cell.smell && this.cell.revealed
       ? this.cell.smell.toString()
       : '';

@@ -152,7 +152,7 @@ export class BoardService {
     this.isMoving = true;
     setTimeout(() => {
       this.isMoving = false;
-    }, 400);
+    }, 300);
 
     this._playerPosition.next({ x, y });
     this._direction.next(dir);
