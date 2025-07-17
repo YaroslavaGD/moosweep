@@ -9,6 +9,7 @@ import {
 import { BehaviorSubject } from 'rxjs';
 import { Cell } from '../models/cell.model';
 import { map } from 'rxjs';
+import { AudioService } from './audio.service';
 
 @Injectable({
   providedIn: 'root',
@@ -41,8 +42,9 @@ export class BoardService {
       })
     )
   );
+  private ambientStarted = false;
 
-  constructor() {
+  constructor(private audio: AudioService) {
     this.generateCells();
   }
 
@@ -143,6 +145,11 @@ export class BoardService {
   move(dir: Direction) {
     if (this.isMoving) return;
 
+    if (!this.ambientStarted) {
+      this.audio.startAmbient();
+      this.ambientStarted = true;
+    }
+
     const prevPos = this._playerPosition.value;
     let { x, y } = prevPos;
 
@@ -160,6 +167,9 @@ export class BoardService {
         x = Math.min(GRID_SIZE.COLUMN - 1, x + 1);
         break;
     }
+
+    if (x === prevPos.x && y === prevPos.y) return;
+    this.audio.play('move');
 
     this.isMoving = true;
     setTimeout(() => {
