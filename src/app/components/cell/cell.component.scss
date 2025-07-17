@@ -1,24 +1,41 @@
 .cell {
+  position: relative;
   width: var(--cell-size);
   height: var(--cell-size);
-  background-image: url(/assets/grass.png);
-  position: relative;
-  overflow: hidden;
-  transition: filter 0.5s ease;
+  background-image: url(/assets/grass2.png);
+  overflow: visible;
   filter: brightness(1) sepia(0);
+  transition: filter 0.5s ease;
 }
 
 .cell.revealed {
-  background-image: url(/assets/grass_yellow.png);
+  background-image: url(/assets/grass_empty2.png);
   // filter: brightness(0.75) sepia(0.3);
 }
 
-.cell.mine {
-  background-color: brown;
+.content {
+  position: absolute;
+  top: -13px;
+  right: -9px;
+  width: 60px;
+  height: 40px;
+  overflow: visible;
+  color: #38664a;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  opacity: 0;
+  background-image: url(/assets/thought_bubble.svg);
+  background-size: 40px;
+  background-position: bottom;
+  background-repeat: no-repeat;
+  transition: opacity 0.3s ease-out;
 }
 
-.content {
-  pointer-events: none;
-  color: #fff;
-  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+.content--visible {
+  opacity: 0.95;
+}
+
+.content__number {
+  display: block;
+  text-align: center;
+  transform: translateY(33%);
 }

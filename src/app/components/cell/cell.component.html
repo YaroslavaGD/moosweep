@@ -4,5 +4,10 @@
   [class.revealed]="cell.revealed"
   [style.background-position]="backgroundPosition"
 >
-  <span class="content">{{ displayContent }}</span>
+  <div class="content" [class.content--visible]="!!delayedContent">
+    <span class="content__number">
+      {{ delayedContent }}
+    </span>
+  </div>
+  <span class="hint">{{ displayHint }}</span>
 </div>

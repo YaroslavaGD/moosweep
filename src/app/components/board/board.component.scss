@@ -1,3 +1,10 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
 .board {
   position: relative;
   width: calc(var(--board-width) * var(--cell-size)); /* 15 * 64 */
@@ -21,7 +28,7 @@
 
 .state {
   color: #fff;
-  padding: 15px 10px 10px;
+  padding: 15px 10px 20px;
   width: calc(var(--board-width) * var(--cell-size));
   background-color: var(--board-color);
   text-align: center;

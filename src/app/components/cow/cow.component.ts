@@ -66,7 +66,7 @@ export class CowComponent implements OnChanges {
           step++;
           if (step >= COW_FRAME_NUMBER) clearInterval(interval);
         });
-      }, 100);
+      }, 150);
     });
   }
 }

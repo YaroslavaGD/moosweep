@@ -1,8 +1,8 @@
 :root {
-  --cell-size: 64px;
-  --cow-cell-size: 128px;
-  --board-width: 15;
-  --board-height: 9;
-  --cow-width: 4;
-  --cow-height: 4;
+  --cell-size: 128px; //64px
+  // --cow-cell-size: 128px;
+  --board-width: 9;
+  --board-height: 6;
+  --cow-width: 3; //4
+  --cow-height: 1; //4
 }

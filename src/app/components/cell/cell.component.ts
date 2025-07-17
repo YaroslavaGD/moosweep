@@ -1,4 +1,10 @@
-import { Component, HostListener, inject, Input } from '@angular/core';
+import {
+  Component,
+  HostListener,
+  inject,
+  Input,
+  OnChanges,
+} from '@angular/core';
 import { Cell } from '../../models/cell.model';
 import { BoardService } from '../../services/board.service';
 import {
@@ -33,7 +39,7 @@ import {
     ]),
   ],
 })
-export class CellComponent {
+export class CellComponent implements OnChanges {
   @Input({ required: true }) cell!: Cell;
 
   private readonly boardService = inject(BoardService);
@@ -41,8 +47,21 @@ export class CellComponent {
   get backgroundPosition(): string {
     return `-${this.cell.spriteX}px -${this.cell.spriteY}px`;
   }
+  delayedContent: string | null = null;
 
-  get displayContent(): string {
+  ngOnChanges() {
+    if (this.cell.revealed && this.cell.smell) {
+      setTimeout(() => {
+        this.delayedContent = this.cell.smell
+          ? this.cell.smell.toString()
+          : null;
+      }, 350);
+    } else {
+      this.delayedContent = null;
+    }
+  }
+
+  get displayHint(): string {
     if (this.cell.flagged) {
       return '💩';
     }
@@ -50,9 +69,7 @@ export class CellComponent {
     // if (this.cell.hasMine) {
     //   return '💥';
     // }
-    return this.cell.smell && this.cell.revealed
-      ? this.cell.smell.toString()
-      : '';
+    return '';
   }
 
   @HostListener('contextmenu', ['$event'])
