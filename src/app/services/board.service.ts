@@ -8,6 +8,7 @@ import {
 } from '../constants/game.constants';
 import { BehaviorSubject } from 'rxjs';
 import { Cell } from '../models/cell.model';
+import { map } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -17,7 +18,7 @@ export class BoardService {
   readonly gridSize = GRID_SIZE.ROW * GRID_SIZE.COLUMN;
   private _playerPosition = new BehaviorSubject<{ x: number; y: number }>({
     x: 0,
-    y: 0,
+    y: GRID_SIZE.ROW - 1,
   });
   readonly playerPosition$ = this._playerPosition.asObservable();
 
@@ -31,6 +32,15 @@ export class BoardService {
 
   private _revealedNumber = new BehaviorSubject<number>(0);
   readonly revealedNumber$ = this._revealedNumber.asObservable();
+
+  readonly cellReversed$ = this.cells$.pipe(
+    map((cells) =>
+      [...cells].sort((a, b) => {
+        if (a.y === b.y) return a.x - b.x;
+        return b.y - a.y;
+      })
+    )
+  );
 
   constructor() {
     this.generateCells();
@@ -64,7 +74,9 @@ export class BoardService {
     }
 
     this._cells.next(cells);
-    this.revealCell(0, 0);
+
+    const start = this._playerPosition.value;
+    this.revealCell(start.x, start.y);
   }
 
   private generateSprite(
@@ -234,7 +246,7 @@ export class BoardService {
   }
 
   resetGame() {
-    this._playerPosition.next({ x: 0, y: 0 });
+    this._playerPosition.next({ x: 0, y: GRID_SIZE.ROW - 1 });
     this._direction.next('down');
     this._revealedNumber.next(0);
     this.spriteSeed = Math.floor(Math.random() * 10000000);

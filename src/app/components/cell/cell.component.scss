@@ -6,6 +6,7 @@
   overflow: visible;
   filter: brightness(1) sepia(0);
   transition: filter 0.5s ease;
+  transform: scaleY(-1);
 }
 
 .cell.revealed {
@@ -15,7 +16,7 @@
 
 .content {
   position: absolute;
-  top: -13px;
+  top: -3px;
   right: -9px;
   width: 60px;
   height: 40px;

@@ -15,7 +15,7 @@ import { toSignal } from '@angular/core/rxjs-interop';
 export class BoardComponent {
   readonly boardService = inject(BoardService);
 
-  readonly cells = toSignal(this.boardService.cells$);
+  readonly cells = toSignal(this.boardService.cellReversed$);
   readonly playerPosition = toSignal(this.boardService.playerPosition$);
   readonly direction = toSignal(this.boardService.direction$);
   readonly currentGrass = toSignal(this.boardService.revealedNumber$);
