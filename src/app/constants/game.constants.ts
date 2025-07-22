@@ -1,6 +1,6 @@
-export const TILE_SIZE = 128; //64
+export const TILE_SIZE = 96; //128
 export const GRID_SIZE = {
-  ROW: 6,
+  ROW: 9,
   COLUMN: 9,
   BLOCK: 3,
 };
