@@ -1,13 +1,15 @@
-<div
-  class="cell"
-  [class.mine]="cell.hasMine"
-  [class.revealed]="cell.revealed"
-  [style.background-position]="backgroundPosition"
->
-  <div class="content" [class.content--visible]="!!delayedContent">
-    <span class="content__number bagel">
-      {{ delayedContent }}
-    </span>
+<div class="cell-background" [class.revealed]="cell.revealed">
+  <div
+    class="cell"
+    [class.mine]="cell.hasMine"
+    [class.revealed]="cell.revealed"
+    [style.background-position]="backgroundPosition"
+  >
+    <div class="content" [class.content--visible]="!!delayedContent">
+      <span class="content__number bagel">
+        {{ delayedContent }}
+      </span>
+    </div>
+    <span class="hint">{{ displayHint }}</span>
   </div>
-  <span class="hint">{{ displayHint }}</span>
 </div>

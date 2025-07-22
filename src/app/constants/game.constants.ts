@@ -8,8 +8,8 @@ export const CELL_NUMBER = GRID_SIZE.COLUMN * GRID_SIZE.ROW;
 export const MINE_NUMBER = CELL_NUMBER / (GRID_SIZE.BLOCK * GRID_SIZE.BLOCK);
 export const GRASS_NUMBER = CELL_NUMBER - MINE_NUMBER;
 export const GRASS_SPRITE_SIZE = {
-  ROW: 1, //5
-  COLUMN: 1, //11
+  ROW: 3, //5
+  COLUMN: 3, //11
 };
 export const COW_FRAME_NUMBER = 3;
 

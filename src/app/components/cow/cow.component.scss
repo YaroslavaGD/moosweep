@@ -4,7 +4,7 @@
   left: 0;
   width: var(--cell-size);
   height: var(--cell-size);
-  background-image: url(/assets/cow_walk2.png);
+  background-image: url(/assets/cow_walk3.png);
   background-size: calc(var(--cow-width) * var(--cell-size))
     calc(var(--cow-height) * var(--cell-size));
   transition: transform 0.5s ease-out;

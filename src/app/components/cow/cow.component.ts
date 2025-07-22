@@ -30,8 +30,8 @@ export class CowComponent implements OnChanges {
   directionMap = {
     up: 0,
     left: 1,
-    down: 2,
-    right: 3,
+    down: 0,
+    right: 0,
   };
 
   constructor(
