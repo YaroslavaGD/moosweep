@@ -63,15 +63,8 @@ export class CellComponent implements OnChanges {
     }
   }
 
-  get displayHint(): string {
-    if (this.cell.flagged) {
-      return '💩';
-    }
-
-    // if (this.cell.hasMine) {
-    //   return '💥';
-    // }
-    return '';
+  get displayHint(): boolean {
+    return (this.cell.flagged && !this.cell.revealed) || false;
   }
 
   @HostListener('contextmenu', ['$event'])
