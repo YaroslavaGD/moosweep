@@ -2,7 +2,7 @@
   position: relative;
   width: var(--cell-size);
   height: var(--cell-size);
-  background-image: url(/assets/grass3.png);
+  background-image: url(/assets/grass.png);
   background-size: calc(3 * var(--cell-size)) calc(3 * var(--cell-size));
   overflow: visible;
   filter: brightness(1) sepia(0);
@@ -13,7 +13,7 @@
   width: var(--cell-size);
   height: var(--cell-size);
   background-size: var(--cell-size) var(--cell-size);
-  background-image: url(/assets/grass_empty3.png);
+  background-image: url(/assets/grass_empty.png);
   transform: scaleY(-1);
 }
 
@@ -23,18 +23,24 @@
 
 .content {
   position: absolute;
-  top: -3px;
-  right: -9px;
-  width: 60px;
-  height: 40px;
+  display: block;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: var(--cell-size);
+  height: var(--cell-size);
   overflow: visible;
   color: var(--number-color);
   opacity: 0;
-  background-image: url(/assets/thought_bubble.svg);
-  background-size: 40px;
+  background-image: url(/assets/bubble.png);
+  background-size: var(--cell-size);
   background-position: bottom;
   background-repeat: no-repeat;
   transition: opacity 0.3s ease-out;
+}
+
+.content.content--left {
+  transform: scale(-1, 1);
 }
 
 .content--visible {
@@ -44,5 +50,9 @@
 .content__number {
   display: block;
   text-align: center;
-  transform: translateY(16%);
+  transform: translateY(30%) translateX(-30%);
+}
+
+.content--left .content__number {
+  transform: scale(-1, 1) translateY(30%) translateX(30%);
 }

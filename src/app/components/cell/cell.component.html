@@ -5,7 +5,11 @@
     [class.revealed]="cell.revealed"
     [style.background-position]="backgroundPosition"
   >
-    <div class="content" [class.content--visible]="!!delayedContent">
+    <div
+      class="content"
+      [class.content--visible]="!!delayedContent"
+      [class.content--left]="direction()! && direction() === 'left'"
+    >
       <span class="content__number bagel">
         {{ delayedContent }}
       </span>

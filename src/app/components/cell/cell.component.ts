@@ -14,6 +14,7 @@ import {
   animate,
   transition,
 } from '@angular/animations';
+import { toSignal } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-cell',
@@ -43,6 +44,7 @@ export class CellComponent implements OnChanges {
   @Input({ required: true }) cell!: Cell;
 
   private readonly boardService = inject(BoardService);
+  readonly direction = toSignal(this.boardService.direction$);
 
   get backgroundPosition(): string {
     return `-${this.cell.spriteX}px -${this.cell.spriteY}px`;
