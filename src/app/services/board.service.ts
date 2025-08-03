@@ -117,7 +117,7 @@ export class BoardService {
 
         if (x >= GRID_SIZE.COLUMN || y >= GRID_SIZE.ROW) continue;
 
-        if (x === 0 && y === 0) continue;
+        if (x === 0 && y === GRID_SIZE.ROW - 1) continue;
 
         const cell = cells.find((c) => c.x === x && c.y === y);
         if (cell) candidates.push(cell);
