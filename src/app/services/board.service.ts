@@ -168,7 +168,10 @@ export class BoardService {
         break;
     }
 
+    const nextCell = this.getCell(x, y);
+    if (nextCell && nextCell.flagged) return;
     if (x === prevPos.x && y === prevPos.y) return;
+
     this.audio.play('move');
 
     this.isMoving = true;
@@ -193,6 +196,7 @@ export class BoardService {
 
     const wasRevealed = cell.revealed;
     cell.revealed = true;
+    cell.flagged = false;
 
     if (!wasRevealed) {
       this._revealedNumber.next(this._revealedNumber.value + 1);
@@ -219,6 +223,7 @@ export class BoardService {
     this.updateCell(x, y, (c) => ({
       ...c,
       revealed: true,
+      flagged: false,
       smell,
     }));
   }

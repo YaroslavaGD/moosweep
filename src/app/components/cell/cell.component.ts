@@ -71,9 +71,9 @@ export class CellComponent implements OnChanges {
   onRightClick(event: MouseEvent) {
     event.preventDefault();
 
-    this.boardService.flagCell(this.cell.x, this.cell.y);
-    // if (!this.cell.revealed) {
-    this.cell.flagged = !this.cell.flagged;
-    // }
+    if (!this.cell.revealed) {
+      this.boardService.flagCell(this.cell.x, this.cell.y);
+      this.cell.flagged = !this.cell.flagged;
+    }
   }
 }
