@@ -79,6 +79,14 @@ export class BoardService {
 
     const start = this._playerPosition.value;
     this.revealCell(start.x, start.y);
+    this.updateCell(start.x + 1, start.y, (c) => ({
+      ...c,
+      path: true,
+    }));
+    this.updateCell(start.x, start.y - 1, (c) => ({
+      ...c,
+      path: true,
+    }));
   }
 
   private generateSprite(
@@ -142,6 +150,25 @@ export class BoardService {
     this._cells.next(updatedCells);
   }
 
+  tryToMove(x: number, y: number) {
+    const current = this._playerPosition.value;
+    const dx = x - current.x;
+    const dy = y - current.y;
+
+    if ((Math.abs(dx) === 1 && dy === 0) || (Math.abs(dy) === 1 && dx === 0)) {
+      const dir = this.getDirectionFromDelta(dx, dy);
+      if (dir) this.move(dir);
+    }
+  }
+
+  private getDirectionFromDelta(dx: number, dy: number): Direction | null {
+    if (dx === 1) return 'right';
+    if (dx === -1) return 'left';
+    if (dy === 1) return 'down';
+    if (dy === -1) return 'up';
+    return null;
+  }
+
   move(dir: Direction) {
     if (this.isMoving) return;
 
@@ -172,6 +199,13 @@ export class BoardService {
     if (nextCell && nextCell.flagged) return;
     if (x === prevPos.x && y === prevPos.y) return;
 
+    const prevNeighbors = this.getOrthogonalNeighbors(prevPos.x, prevPos.y);
+    prevNeighbors.forEach((neighbor) => {
+      this.updateCell(neighbor.x, neighbor.y, (c) => ({
+        ...c,
+        path: false,
+      }));
+    });
     this.audio.play('move');
 
     this.isMoving = true;
@@ -188,6 +222,14 @@ export class BoardService {
       revealed: true,
       smell: 0,
     }));
+
+    const nextNeighbors = this.getOrthogonalNeighbors(x, y);
+    nextNeighbors.forEach((neighbor) => {
+      this.updateCell(neighbor.x, neighbor.y, (c) => ({
+        ...c,
+        path: true,
+      }));
+    });
   }
 
   private revealCell(x: number, y: number) {
@@ -247,6 +289,33 @@ export class BoardService {
 
         const neighbor = this.getCell(nx, ny);
         if (neighbor) neighbors.push(neighbor);
+      }
+    }
+
+    return neighbors;
+  }
+
+  getOrthogonalNeighbors(x: number, y: number): Cell[] {
+    const directions = [
+      { dx: 0, dy: -1 }, // up
+      { dx: 0, dy: 1 }, // down
+      { dx: -1, dy: 0 }, // left
+      { dx: 1, dy: 0 }, // right
+    ];
+
+    const neighbors: Cell[] = [];
+
+    for (const { dx, dy } of directions) {
+      const nx = x + dx;
+      const ny = y + dy;
+
+      if (nx < 0 || ny < 0 || nx >= GRID_SIZE.COLUMN || ny >= GRID_SIZE.ROW) {
+        continue;
+      }
+
+      const neighbor = this.getCell(nx, ny);
+      if (neighbor) {
+        neighbors.push(neighbor);
       }
     }
 

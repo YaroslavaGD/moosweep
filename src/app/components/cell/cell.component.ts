@@ -76,4 +76,11 @@ export class CellComponent implements OnChanges {
       this.cell.flagged = !this.cell.flagged;
     }
   }
+
+  @HostListener('click', ['$event'])
+  onLeftClick() {
+    if (this.cell.flagged) return;
+    console.log('move');
+    this.boardService.tryToMove(this.cell.x, this.cell.y);
+  }
 }

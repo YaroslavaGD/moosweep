@@ -28,8 +28,12 @@ export class BoardComponent {
       ArrowDown: 'down',
       ArrowLeft: 'left',
       ArrowRight: 'right',
+      KeyW: 'up',
+      KeyA: 'left',
+      KeyS: 'down',
+      KeyD: 'right',
     };
-    const dir = keyMap[event.key];
+    const dir = keyMap[event.code];
 
     if (dir) {
       event.preventDefault();
