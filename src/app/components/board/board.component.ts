@@ -5,10 +5,11 @@ import { CommonModule } from '@angular/common';
 import { Direction, GRASS_NUMBER } from '../../constants/game.constants';
 import { BoardService } from '../../services/board.service';
 import { toSignal } from '@angular/core/rxjs-interop';
+import { SettingsComponent } from '../settings/settings.component';
 @Component({
   selector: 'app-board',
   standalone: true,
-  imports: [CommonModule, CowComponent, CellComponent],
+  imports: [CommonModule, CowComponent, CellComponent, SettingsComponent],
   templateUrl: './board.component.html',
   styleUrl: './board.component.scss',
 })

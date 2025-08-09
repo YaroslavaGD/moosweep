@@ -6,6 +6,8 @@ import { Injectable } from '@angular/core';
 export class AudioService {
   private audioMap: Map<string, HTMLAudioElement> = new Map();
   private ambientAudio: HTMLAudioElement | null = null;
+  private globalVolume = 0.5;
+  private activeSounds: Set<HTMLAudioElement> = new Set();
 
   private readonly sounds = {
     move: 'assets/sounds/move.mp3',
@@ -16,15 +18,41 @@ export class AudioService {
   };
 
   constructor() {
+    this.loadVolumeFromStorage();
     this.preloadSounds();
+  }
+
+  private loadVolumeFromStorage() {
+    const savedVolume = localStorage.getItem('globalVolume');
+    if (savedVolume !== null) {
+      this.globalVolume = parseFloat(savedVolume);
+    }
   }
 
   private preloadSounds() {
     Object.entries(this.sounds).forEach(([key, path]) => {
       const audio = new Audio(path);
+      audio.volume = this.globalVolume;
       audio.load();
       this.audioMap.set(key, audio);
     });
+  }
+
+  setGlobalVolume(volume: number) {
+    this.globalVolume = volume;
+    localStorage.setItem('globalVolume', volume.toString());
+
+    this.activeSounds.forEach((audio) => {
+      audio.volume = volume;
+    });
+
+    if (this.ambientAudio) {
+      this.ambientAudio.volume = volume;
+    }
+  }
+
+  getGlobalVolume(): number {
+    return this.globalVolume;
   }
 
   async play(soundKey: keyof typeof this.sounds) {
@@ -35,7 +63,13 @@ export class AudioService {
     try {
       const instance = source.cloneNode(true) as HTMLAudioElement;
       instance.currentTime = 0;
-      instance.volume = 0.2;
+      instance.volume = this.globalVolume;
+      this.activeSounds.add(instance);
+
+      instance.addEventListener('ended', () => {
+        this.activeSounds.delete(instance);
+      });
+
       await instance.play();
     } catch (err) {
       console.warn(`Sound "${soundKey}" failed to play`, err);
@@ -50,7 +84,7 @@ export class AudioService {
 
     this.ambientAudio = ambient;
     ambient.loop = true;
-    ambient.volume = 0.5;
+    ambient.volume = this.globalVolume;
     ambient.play().catch((e) => console.warn('Ambient failed to start', e));
   }
 
