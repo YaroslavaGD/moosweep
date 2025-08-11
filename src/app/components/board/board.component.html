@@ -1,3 +1,4 @@
+<app-settings></app-settings>
 <div class="state">
   <span>GRASS COUNTER:</span>
   <span>{{ currentGrass() }}</span>
@@ -14,10 +15,7 @@
     [direction]="direction()!"
   ></app-cow>
 </div>
-<div class="controls">
-  <button>restart</button>
-  <app-settings></app-settings>
-</div>
+
 <!-- <div class="controls">
   <button (click)="boardService.move('up')">⬆️</button>
   <button (click)="boardService.move('down')">⬇️</button>

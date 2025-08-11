@@ -12,33 +12,8 @@
   background-color: var(--board-color);
 }
 
-.controls {
-  color: #fff;
-  padding: 10px;
-  width: calc(var(--board-width) * var(--cell-size));
-  background-color: var(--board-color);
-  text-align: center;
-}
-
-.controls button {
-  cursor: pointer;
-  font-size: 20px;
-  margin: 5px;
-  background-color: unset;
-  color: var(--border-color);
-  border: 2px solid var(--border-color);
-  border-radius: 10px;
-  background-color: #44444400;
-  transition: background-color 0.3s ease-out;
-  &:hover {
-    background-color: var(--button-color);
-    border-color: var(--number-color);
-    color: var(--number-color);
-  }
-}
-
 .state {
-  color: #fff;
+  color: var(--border-color);
   padding: 15px 10px 20px;
   width: calc(var(--board-width) * var(--cell-size));
   background-color: var(--board-color);

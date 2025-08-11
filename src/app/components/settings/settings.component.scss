@@ -57,3 +57,83 @@ input[type='range']:focus {
   outline: none;
   box-shadow: 0 0 5px var(--border-color);
 }
+
+.controls {
+  position: absolute;
+  top: 0;
+  right: 0;
+  color: #fff;
+  padding: 10px;
+  /* width: calc(var(--board-width) * var(--cell-size)); */
+  background-color: var(--board-color);
+  text-align: center;
+}
+
+.controls button {
+  cursor: pointer;
+  font-size: 20px;
+  margin: 5px;
+  background-color: unset;
+  color: var(--border-color);
+  border: 2px solid var(--border-color);
+  border-radius: 10px;
+  transition: background-color 0.3s ease-out;
+  &:hover {
+    background-color: var(--button-color);
+    border-color: var(--number-color);
+    color: var(--number-color);
+  }
+}
+
+.controls__menu {
+  position: absolute;
+  right: calc(100% - 50px);
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  margin-top: 10px;
+  background: var(--board-color);
+  border: 2px solid var(--border-color);
+  border-radius: 10px;
+  z-index: 1000;
+}
+
+.controls-icon {
+  display: block;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+}
+
+.controls-icon__svg {
+  fill: transparent;
+  stroke: transparent;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 1500;
+  stroke-dashoffset: 0;
+}
+
+.controls-icon__svg--out {
+  fill: transparent;
+  stroke: var(--border-color);
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 2;
+}
+
+.controls-icon:hover .controls-icon__svg {
+  stroke-width: 2px;
+  stroke: var(--number-color);
+  fill: var(--button-color);
+  animation: dash 3s linear;
+}
+
+@keyframes dash {
+  from {
+    stroke-dashoffset: 1500;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
