@@ -1,5 +1,5 @@
 <div class="controls">
-  <div class="controls-icon">
+  <button class="controls-icon" (click)="toggleMenu()">
     <svg
       viewBox="0 0 48 48"
       data-name="Layer 2"
@@ -8,30 +8,35 @@
       <g stroke-width="0"></g>
       <g stroke-linecap="round" stroke-linejoin="round"></g>
       <g>
-        <!-- <defs><style>.cls-1{fill:none;stroke:#7ce3a3;stroke-linecap:round;stroke-linejoin:round; stroke-width:2;}</style></defs> -->
         <path
           class="controls-icon__svg--out"
           d="M39.23,26a16.52,16.52,0,0,0,.14-2,16.52,16.52,0,0,0-.14-2l4.33-3.39a1,1,0,0,0,.25-1.31l-4.1-7.11a1,1,0,0,0-1.25-.44l-5.11,2.06a15.68,15.68,0,0,0-3.46-2l-.77-5.43a1,1,0,0,0-1-.86H19.9a1,1,0,0,0-1,.86l-.77,5.43a15.36,15.36,0,0,0-3.46,2L9.54,9.75a1,1,0,0,0-1.25.44L4.19,17.3a1,1,0,0,0,.25,1.31L8.76,22a16.66,16.66,0,0,0-.14,2,16.52,16.52,0,0,0,.14,2L4.44,29.39a1,1,0,0,0-.25,1.31l4.1,7.11a1,1,0,0,0,1.25.44l5.11-2.06a15.68,15.68,0,0,0,3.46,2l.77,5.43a1,1,0,0,0,1,.86h8.2a1,1,0,0,0,1-.86l.77-5.43a15.36,15.36,0,0,0,3.46-2l5.11,2.06a1,1,0,0,0,1.25-.44l4.1-7.11a1,1,0,0,0-.25-1.31ZM24,31.18A7.18,7.18,0,1,1,31.17,24,7.17,7.17,0,0,1,24,31.18Z"
         ></path>
       </g>
       <g>
-        <!-- <defs><style>.cls-1{fill:none;stroke:#7ce3a3;stroke-linecap:round;stroke-linejoin:round; stroke-width:2;}</style></defs> -->
         <path
           class="controls-icon__svg"
           d="M39.23,26a16.52,16.52,0,0,0,.14-2,16.52,16.52,0,0,0-.14-2l4.33-3.39a1,1,0,0,0,.25-1.31l-4.1-7.11a1,1,0,0,0-1.25-.44l-5.11,2.06a15.68,15.68,0,0,0-3.46-2l-.77-5.43a1,1,0,0,0-1-.86H19.9a1,1,0,0,0-1,.86l-.77,5.43a15.36,15.36,0,0,0-3.46,2L9.54,9.75a1,1,0,0,0-1.25.44L4.19,17.3a1,1,0,0,0,.25,1.31L8.76,22a16.66,16.66,0,0,0-.14,2,16.52,16.52,0,0,0,.14,2L4.44,29.39a1,1,0,0,0-.25,1.31l4.1,7.11a1,1,0,0,0,1.25.44l5.11-2.06a15.68,15.68,0,0,0,3.46,2l.77,5.43a1,1,0,0,0,1,.86h8.2a1,1,0,0,0,1-.86l.77-5.43a15.36,15.36,0,0,0,3.46-2l5.11,2.06a1,1,0,0,0,1.25-.44l4.1-7.11a1,1,0,0,0-.25-1.31ZM24,31.18A7.18,7.18,0,1,1,31.17,24,7.17,7.17,0,0,1,24,31.18Z"
         ></path>
       </g>
     </svg>
-  </div>
-  <div class="controls__menu">
-    <button>restart</button>
-    <input
-      type="range"
-      min="0"
-      max="1"
-      step="0.01"
-      [value]="volume"
-      (input)="onVolumeChange($event)"
-    />
+  </button>
+  <div class="controls-menu" [class.controls-menu--open]="isOpen">
+    <button class="controls-button">restart</button>
+    <div>
+      <button class="mute-btn controls-button" (click)="toggleMute()">
+        {{ isMuted ? '🔇' : '🔊' }}
+      </button>
+      <input
+        id="volume"
+        type="range"
+        min="0"
+        max="1"
+        step="0.01"
+        [value]="volume"
+        (input)="onVolumeChange($event)"
+      />
+      <span class="volume-value">{{ volume * 100 | number: '1.0-0' }}%</span>
+    </div>
   </div>
 </div>
