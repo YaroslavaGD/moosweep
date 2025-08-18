@@ -2,7 +2,7 @@
   position: relative;
   width: var(--cell-size);
   height: var(--cell-size);
-  background-image: url(/assets/grass.png);
+  background-image: url(/assets/images/grass.png);
   background-size: calc(3 * var(--cell-size)) calc(3 * var(--cell-size));
   overflow: visible;
   filter: brightness(1) sepia(0);
@@ -18,7 +18,7 @@
   width: var(--cell-size);
   height: var(--cell-size);
   background-size: var(--cell-size) var(--cell-size);
-  background-image: url(/assets/grass_empty.png);
+  background-image: url(/assets/images/grass_empty.png);
   transform: scaleY(-1);
 }
 
@@ -37,7 +37,7 @@
   overflow: visible;
   color: var(--number-color);
   opacity: 0;
-  background-image: url(/assets/bubble.png);
+  background-image: url(/assets/images/bubble.png);
   background-size: var(--cell-size);
   background-position: bottom;
   background-repeat: no-repeat;
@@ -66,7 +66,7 @@
   display: block;
   width: 100%;
   height: 100%;
-  background-image: url(/assets/hint.png);
+  background-image: url(/assets/images/hint.png);
   background-size: var(--cell-size);
   background-position: bottom;
   background-repeat: no-repeat;
@@ -78,7 +78,7 @@
   top: 0;
   width: 100%;
   height: 100%;
-  background-image: url(/assets/border.png);
+  background-image: url(/assets/images/border.png);
   background-size: var(--cell-size);
   background-position: bottom;
   background-repeat: no-repeat;
