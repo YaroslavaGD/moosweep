@@ -44,6 +44,9 @@ export class BoardService {
   );
   private ambientStarted = false;
 
+  private _gameResult = new BehaviorSubject<'win' | 'lose' | null>(null);
+  gameResult$ = this._gameResult.asObservable();
+
   constructor(private audio: AudioService) {
     this.generateCells();
   }
@@ -246,16 +249,18 @@ export class BoardService {
 
     if (this._revealedNumber.value === GRASS_NUMBER) {
       setTimeout(() => {
-        alert('КОНЕЦ');
-        this.resetGame();
+        this.winGame();
+        // alert('КОНЕЦ');
+        // this.resetGame();
         return;
       }, 500);
     }
 
     if (cell.hasMine) {
       setTimeout(() => {
-        alert('ФУ! Коровка на мине!');
-        this.resetGame();
+        this.loseGame();
+        // alert('ФУ! Коровка на мине!');
+        // this.resetGame();
         return;
       }, 500);
     }
@@ -335,5 +340,14 @@ export class BoardService {
     this._revealedNumber.next(0);
     this.spriteSeed = Math.floor(Math.random() * 10000000);
     this.generateCells();
+    this._gameResult.next(null);
+  }
+
+  loseGame() {
+    this._gameResult.next('lose');
+  }
+
+  winGame() {
+    this._gameResult.next('win');
   }
 }

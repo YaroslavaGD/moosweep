@@ -1,0 +1,15 @@
+<div class="overlay" *ngIf="open">
+  <div class="alert">
+    <img *ngIf="result === 'win'" src="assets/images/win.png" alt="You win!" />
+    <h2 *ngIf="result === 'win'">Победа!</h2>
+
+    <img
+      *ngIf="result === 'lose'"
+      src="assets/images/lose.png"
+      alt="You lose!"
+    />
+    <h2 *ngIf="result === 'lose'">Поражение!</h2>
+
+    <button (click)="onClose()">OK</button>
+  </div>
+</div>

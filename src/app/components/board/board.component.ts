@@ -6,10 +6,17 @@ import { Direction, GRASS_NUMBER } from '../../constants/game.constants';
 import { BoardService } from '../../services/board.service';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { SettingsComponent } from '../settings/settings.component';
+import { AlertComponent } from '../alert/alert.component';
 @Component({
   selector: 'app-board',
   standalone: true,
-  imports: [CommonModule, CowComponent, CellComponent, SettingsComponent],
+  imports: [
+    CommonModule,
+    CowComponent,
+    CellComponent,
+    SettingsComponent,
+    AlertComponent,
+  ],
   templateUrl: './board.component.html',
   styleUrl: './board.component.scss',
 })
@@ -21,6 +28,9 @@ export class BoardComponent {
   readonly direction = toSignal(this.boardService.direction$);
   readonly currentGrass = toSignal(this.boardService.revealedNumber$);
   readonly totalGrass = GRASS_NUMBER;
+  readonly gameResult = toSignal(this.boardService.gameResult$, {
+    initialValue: null,
+  });
 
   @HostListener('window:keydown', ['$event'])
   handleKeyDown(event: KeyboardEvent) {
@@ -40,5 +50,11 @@ export class BoardComponent {
       event.preventDefault();
       this.boardService.move(dir);
     }
+  }
+
+  readonly dialogOpen = () => this.gameResult() !== null;
+
+  onDialogClosed() {
+    this.boardService.resetGame();
   }
 }

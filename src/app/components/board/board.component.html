@@ -15,10 +15,8 @@
     [direction]="direction()!"
   ></app-cow>
 </div>
-
-<!-- <div class="controls">
-  <button (click)="boardService.move('up')">⬆️</button>
-  <button (click)="boardService.move('down')">⬇️</button>
-  <button (click)="boardService.move('left')">⬅️</button>
-  <button (click)="boardService.move('right')">➡️</button>
-</div> -->
+<app-alert
+  [open]="dialogOpen()"
+  [result]="gameResult()"
+  (closed)="onDialogClosed()"
+></app-alert>
