@@ -1,4 +1,10 @@
-import { Component, inject, OnInit } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  HostListener,
+  inject,
+  OnInit,
+} from '@angular/core';
 import { AudioService } from '../../services/audio.service';
 import { CommonModule } from '@angular/common';
 
@@ -11,10 +17,18 @@ import { CommonModule } from '@angular/common';
 })
 export class SettingsComponent implements OnInit {
   readonly audioService = inject(AudioService);
+  private eRef = inject(ElementRef);
   volume!: number;
   prevVolume!: number;
   isOpen = false;
   isMuted = false;
+
+  @HostListener('document:click', ['$event'])
+  clickOutside(event: Event) {
+    if (this.isOpen && !this.eRef.nativeElement.contains(event.target)) {
+      this.isOpen = false;
+    }
+  }
 
   ngOnInit() {
     this.volume = this.audioService.getGlobalVolume();

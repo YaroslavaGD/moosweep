@@ -1,7 +1,7 @@
 input[type='range'] {
   -webkit-appearance: none; /* reset default style for Safari/Chrome */
   appearance: none; /* reset default style for Safari/Chrome */
-  width: 200px;
+  width: 150px;
   height: 8px;
   background: var(--board-color);
   border-radius: 4px;
@@ -66,7 +66,7 @@ input[type='range']:focus {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  color: #fff;
+  color: var(--border-color);
   padding: 10px;
   background-color: var(--board-color);
   text-align: center;
@@ -140,7 +140,7 @@ input[type='range']:focus {
   stroke: var(--border-color);
   stroke-linecap: round;
   stroke-linejoin: round;
-  stroke-width: 2;
+  stroke-width: 2px;
 }
 
 .controls-icon:hover .controls-icon__svg {
@@ -148,6 +148,29 @@ input[type='range']:focus {
   stroke: var(--number-color);
   fill: var(--button-color);
   animation: dash 3s linear;
+}
+
+.controls-icon__svg-audio--out {
+  stroke-width: 1px;
+}
+
+.controls-icon:hover .controls-icon__svg-audio {
+  stroke-width: 1px;
+  stroke: var(--number-color);
+  fill: var(--button-color);
+  animation: dash 3s linear;
+}
+
+.controls-audio {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.controls-audio-value {
+  display: block;
+  min-width: 40px;
+  font-size: 16px;
 }
 
 @keyframes dash {
