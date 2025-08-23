@@ -25,7 +25,8 @@ export class SettingsComponent implements OnInit {
 
   @HostListener('document:click', ['$event'])
   clickOutside(event: Event) {
-    if (this.isOpen && !this.eRef.nativeElement.contains(event.target)) {
+    const path = event.composedPath();
+    if (this.isOpen && !path.includes(this.eRef.nativeElement)) {
       this.isOpen = false;
     }
   }
