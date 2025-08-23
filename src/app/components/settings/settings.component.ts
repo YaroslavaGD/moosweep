@@ -7,6 +7,7 @@ import {
 } from '@angular/core';
 import { AudioService } from '../../services/audio.service';
 import { CommonModule } from '@angular/common';
+import { BoardService } from '../../services/board.service';
 
 @Component({
   selector: 'app-settings',
@@ -17,6 +18,7 @@ import { CommonModule } from '@angular/common';
 })
 export class SettingsComponent implements OnInit {
   readonly audioService = inject(AudioService);
+  readonly boardService = inject(BoardService);
   private eRef = inject(ElementRef);
   volume!: number;
   prevVolume!: number;
@@ -60,5 +62,9 @@ export class SettingsComponent implements OnInit {
       this.volume = this.prevVolume || 0.5;
       this.audioService.setGlobalVolume(this.volume);
     }
+  }
+
+  onResetClick() {
+    this.boardService.resetGame();
   }
 }

@@ -18,6 +18,8 @@
   width: calc(var(--board-width) * var(--cell-size));
   background-color: var(--board-color);
   text-align: center;
+  font-size: 20px;
+  opacity: 0.8;
 }
 
 .field {

@@ -22,7 +22,7 @@
     </svg>
   </button>
   <div class="controls-menu" [class.controls-menu--open]="isOpen">
-    <button class="controls-button">restart</button>
+    <button class="button bagel" (click)="onResetClick()">Fresh Pasture</button>
     <div class="controls-audio">
       <button class="controls-icon" (click)="toggleMute()">
         <div *ngIf="isMuted; then audioOff; else audioOn"></div>
@@ -90,7 +90,7 @@
         [value]="volume"
         (input)="onVolumeChange($event)"
       />
-      <div class="controls-audio-value">
+      <div class="controls-audio-value bagel">
         {{ volume * 100 | number: '1.0-0' }}%
       </div>
     </div>
