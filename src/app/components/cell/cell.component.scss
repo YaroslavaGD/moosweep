@@ -13,6 +13,10 @@
   cursor: pointer;
 }
 
+.cell--mine {
+  background-image: none;
+}
+
 .cell-background {
   position: relative;
   width: var(--cell-size);
@@ -89,4 +93,20 @@
 .border:hover,
 .border--path {
   opacity: 70%;
+}
+
+.mine {
+  position: absolute;
+  top: 0;
+  opacity: 0;
+  width: var(--cell-size);
+  height: var(--cell-size);
+  transform: scale(-20%);
+
+  transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+}
+
+.mine.mine--visible {
+  opacity: 100%;
+  transform: scale(100%);
 }

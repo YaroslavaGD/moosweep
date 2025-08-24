@@ -1,7 +1,6 @@
 <div class="cell-background" [class.revealed]="cell.revealed">
   <div
     class="cell"
-    [class.mine]="cell.hasMine"
     [class.revealed]="cell.revealed"
     [style.background-position]="backgroundPosition"
   >
@@ -17,4 +16,10 @@
     <span class="hint" [class.hint--marked]="displayHint"></span>
     <span class="border" [class.border--path]="cell.path"></span>
   </div>
+  <img
+    class="mine"
+    [class.mine--visible]="showMine()"
+    src="/assets/images/poops.png"
+    alt="mine"
+  >
 </div>

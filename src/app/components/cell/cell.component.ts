@@ -7,13 +7,6 @@ import {
 } from '@angular/core';
 import { Cell } from '../../models/cell.model';
 import { BoardService } from '../../services/board.service';
-import {
-  trigger,
-  state,
-  style,
-  animate,
-  transition,
-} from '@angular/animations';
 import { toSignal } from '@angular/core/rxjs-interop';
 
 @Component({
@@ -22,34 +15,21 @@ import { toSignal } from '@angular/core/rxjs-interop';
   imports: [],
   templateUrl: './cell.component.html',
   styleUrl: './cell.component.scss',
-  animations: [
-    trigger('revealEffect', [
-      state(
-        'hidden',
-        style({
-          filter: 'brightness(1) sepia(0)',
-        })
-      ),
-      state(
-        'revealed',
-        style({
-          filter: 'brightness(1) sepia(0.3)',
-        })
-      ),
-      transition('hidden => revealed', animate('700ms ease')),
-    ]),
-  ],
 })
 export class CellComponent implements OnChanges {
   @Input({ required: true }) cell!: Cell;
 
   private readonly boardService = inject(BoardService);
   readonly direction = toSignal(this.boardService.direction$);
+  readonly gameResult = toSignal(this.boardService.gameResult$, {
+    initialValue: null,
+  });
 
   get backgroundPosition(): string {
     return `-${this.cell.spriteX}px -${this.cell.spriteY}px`;
   }
   delayedContent: string | null = null;
+  isVisibleMine = false;
 
   ngOnChanges() {
     if (this.cell.revealed && this.cell.smell) {
@@ -80,7 +60,10 @@ export class CellComponent implements OnChanges {
   @HostListener('click', ['$event'])
   onLeftClick() {
     if (this.cell.flagged) return;
-    console.log('move');
     this.boardService.tryToMove(this.cell.x, this.cell.y);
+  }
+
+  showMine() {
+    return this.gameResult() === 'lose' && this.cell.hasMine;
   }
 }

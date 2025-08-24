@@ -250,8 +250,6 @@ export class BoardService {
     if (this._revealedNumber.value === GRASS_NUMBER) {
       setTimeout(() => {
         this.winGame();
-        // alert('КОНЕЦ');
-        // this.resetGame();
         return;
       }, 500);
     }
@@ -259,8 +257,6 @@ export class BoardService {
     if (cell.hasMine) {
       setTimeout(() => {
         this.loseGame();
-        // alert('ФУ! Коровка на мине!');
-        // this.resetGame();
         return;
       }, 500);
     }
