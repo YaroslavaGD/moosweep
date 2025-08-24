@@ -1,7 +1,10 @@
 :root {
-  --cell-size: 96px; //64px
+  --cell-size: 80px; //64px
+  --tile-size: 128px;
   --board-width: 9;
   --board-height: 9;
+  --fence-width: 11;
+  --fence-height: 11;
   --cow-width: 3; //4
   --cow-height: 2; //4
 }

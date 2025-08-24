@@ -1,10 +1,11 @@
 <app-settings></app-settings>
 <div class="state bagel">
-  <span>GOURMET SCORE:&nbsp;</span>
-  <span>{{ currentGrass() }}</span>
-  /
+  <img class="state__img" src="/assets/images/score.png" alt="" />
+  <span>:&nbsp;{{ currentGrass() }}</span>
+  &nbsp;/&nbsp;
   <span>{{ totalGrass }}</span>
 </div>
+
 <div class="board">
   <div class="field">
     <app-cell *ngFor="let cell of cells()" [cell]="cell"></app-cell>
@@ -15,6 +16,7 @@
     [direction]="direction()!"
   ></app-cow>
 </div>
+
 <app-alert
   [open]="dialogOpen()"
   [result]="gameResult()"

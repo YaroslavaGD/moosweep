@@ -59,11 +59,11 @@
 .content__number {
   display: block;
   text-align: center;
-  transform: translateY(30%) translateX(-30%);
+  transform: translateY(18%) translateX(-30%);
 }
 
 .content--left .content__number {
-  transform: scale(-1, 1) translateY(30%) translateX(30%);
+  transform: scale(-1, 1) translateY(18%) translateX(30%);
 }
 
 .hint.hint--marked {
@@ -103,7 +103,9 @@
   height: var(--cell-size);
   transform: scale(-20%);
 
-  transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+  transition:
+    opacity 0.3s ease-out,
+    transform 0.3s ease-out;
 }
 
 .mine.mine--visible {

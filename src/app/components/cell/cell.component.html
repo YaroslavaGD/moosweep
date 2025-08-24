@@ -15,11 +15,11 @@
     </div>
     <span class="hint" [class.hint--marked]="displayHint"></span>
     <span class="border" [class.border--path]="cell.path"></span>
+    <img
+      class="mine"
+      [class.mine--visible]="showMine()"
+      src="/assets/images/poops.png"
+      alt="mine"
+    />
   </div>
-  <img
-    class="mine"
-    [class.mine--visible]="showMine()"
-    src="/assets/images/poops.png"
-    alt="mine"
-  >
 </div>
