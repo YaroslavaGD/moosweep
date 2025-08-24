@@ -173,7 +173,7 @@ export class BoardService {
   }
 
   move(dir: Direction) {
-    if (this.isMoving) return;
+    if (this.isMoving || this._gameResult.value) return;
 
     if (!this.ambientStarted) {
       this.audio.startAmbient();
