@@ -65,6 +65,7 @@ export class SettingsComponent implements OnInit {
   }
 
   onResetClick() {
+    this.toggleMenu();
     this.boardService.resetGame();
   }
 }
