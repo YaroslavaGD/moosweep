@@ -1,7 +1,7 @@
-<div class="cell-background" [class.revealed]="cell.revealed">
+<div class="cell-background" [class.revealed]="cell.revealed || showMine()">
   <div
     class="cell"
-    [class.revealed]="cell.revealed"
+    [class.revealed]="cell.revealed || showMine()"
     [style.background-position]="backgroundPosition"
   >
     <div
