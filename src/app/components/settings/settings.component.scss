@@ -68,25 +68,8 @@ input[type='range']:focus {
   align-items: flex-end;
   color: var(--border-color);
   padding: 10px;
-  background-color: var(--board-color);
   text-align: center;
 }
-
-// .controls-button {
-//   cursor: pointer;
-//   font-size: 20px;
-//   margin: 5px;
-//   background-color: unset;
-//   color: var(--border-color);
-//   border: 2px solid var(--border-color);
-//   border-radius: 10px;
-//   transition: background-color 0.3s ease-out;
-//   &:hover {
-//     background-color: var(--button-color);
-//     border-color: var(--number-color);
-//     color: var(--number-color);
-//   }
-// }
 
 .controls-menu {
   display: flex;

@@ -8,6 +8,10 @@
 body {
   margin: 0;
   background-color: var(--board-color);
+  background-image: url(/assets/images/grass_background.png);
+  background-repeat: repeat;
+  background-size: var(--cell-size);
+  background-attachment: fixed;
   font-family:
     'Baloo 2', 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
