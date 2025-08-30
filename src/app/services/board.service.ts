@@ -340,10 +340,12 @@ export class BoardService {
   }
 
   loseGame() {
+    this.audio.play('lose');
     this._gameResult.next('lose');
   }
 
   winGame() {
+    this.audio.play('win');
     this._gameResult.next('win');
   }
 }

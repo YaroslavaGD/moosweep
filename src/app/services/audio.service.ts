@@ -11,10 +11,10 @@ export class AudioService {
 
   private readonly sounds = {
     move: 'assets/sounds/move.mp3',
-    // flag: 'assets/sounds/flag.mp3',
-    // win: 'assets/sounds/win.mp3',
-    // lose: 'assets/sounds/lose.mp3',
+    win: 'assets/sounds/win.mp3',
+    lose: 'assets/sounds/lose.mp3',
     ambient: 'assets/sounds/ambient_nature.mp3',
+    // flag: 'assets/sounds/flag.mp3',
   };
 
   constructor() {
