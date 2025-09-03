@@ -25,6 +25,18 @@
   pointer-events: none;
 }
 
+.controls {
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  color: var(--border-color);
+  padding: 10px;
+  text-align: center;
+}
+
 .state {
   display: flex;
   align-items: center;

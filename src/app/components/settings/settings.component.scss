@@ -64,14 +64,20 @@ input[type='range']:focus {
   top: 0;
   right: 0;
   display: flex;
-  flex-direction: column;
-  align-items: flex-end;
+  flex-direction: row;
+  align-items: flex-start;
   color: var(--border-color);
   padding: 10px;
   text-align: center;
 }
 
+.settings {
+  position: relative;
+}
+
 .controls-menu {
+  position: absolute;
+  right: 0;
   display: flex;
   flex-direction: column;
   padding: 10px;
@@ -133,11 +139,13 @@ input[type='range']:focus {
   animation: dash 3s linear;
 }
 
-.controls-icon__svg-audio--out {
+.controls-icon__svg-audio--out,
+.controls-icon__svg-question--out {
   stroke-width: 1px;
 }
 
-.controls-icon:hover .controls-icon__svg-audio {
+.controls-icon:hover .controls-icon__svg-audio,
+.controls-icon:hover .controls-icon__svg-question {
   stroke-width: 1px;
   stroke: var(--number-color);
   fill: var(--button-color);

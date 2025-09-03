@@ -36,7 +36,6 @@ export class SettingsComponent implements OnInit {
   ngOnInit() {
     this.volume = this.audioService.getGlobalVolume();
     this.prevVolume = this.volume;
-    console.log('volume =', this.volume);
   }
 
   onVolumeChange(event: Event) {

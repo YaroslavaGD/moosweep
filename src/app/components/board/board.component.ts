@@ -7,6 +7,7 @@ import { BoardService } from '../../services/board.service';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { SettingsComponent } from '../settings/settings.component';
 import { AlertComponent } from '../alert/alert.component';
+import { HelpComponent } from '../help/help.component';
 @Component({
   selector: 'app-board',
   standalone: true,
@@ -15,6 +16,7 @@ import { AlertComponent } from '../alert/alert.component';
     CowComponent,
     CellComponent,
     SettingsComponent,
+    HelpComponent,
     AlertComponent,
   ],
   templateUrl: './board.component.html',
