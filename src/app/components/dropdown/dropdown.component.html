@@ -1,0 +1,8 @@
+<div class="dropdown" [class.dropdown--open]="open">
+  <button class="dropdown-icon" (click)="toggle.emit()">
+    <ng-content select="[dropdown-trigger]"></ng-content>
+  </button>
+  <div class="dropdown-menu" [class.dropdown-menu--open]="open">
+    <ng-content select="[dropdown-content]"></ng-content>
+  </div>
+</div>

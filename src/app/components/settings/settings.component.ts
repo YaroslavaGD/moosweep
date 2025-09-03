@@ -1,37 +1,23 @@
-import {
-  Component,
-  ElementRef,
-  HostListener,
-  inject,
-  OnInit,
-} from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { AudioService } from '../../services/audio.service';
 import { CommonModule } from '@angular/common';
 import { BoardService } from '../../services/board.service';
+import { DropdownComponent } from '../dropdown/dropdown.component';
 
 @Component({
   selector: 'app-settings',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, DropdownComponent],
   templateUrl: './settings.component.html',
   styleUrl: './settings.component.scss',
 })
 export class SettingsComponent implements OnInit {
   readonly audioService = inject(AudioService);
   readonly boardService = inject(BoardService);
-  private eRef = inject(ElementRef);
   volume!: number;
   prevVolume!: number;
   isOpen = false;
   isMuted = false;
-
-  @HostListener('document:click', ['$event'])
-  clickOutside(event: Event) {
-    const path = event.composedPath();
-    if (this.isOpen && !path.includes(this.eRef.nativeElement)) {
-      this.isOpen = false;
-    }
-  }
 
   ngOnInit() {
     this.volume = this.audioService.getGlobalVolume();

@@ -1,53 +1,6 @@
-.help {
-  position: relative;
-}
-
-.controls-menu {
-  position: absolute;
-  right: 0;
-  display: flex;
-  flex-direction: column;
-  padding: 10px;
-  margin-top: 10px;
-  background: var(--board-color);
-  border: 2px solid var(--border-color);
-  border-radius: 10px;
-  overflow: hidden;
-  z-index: 1000;
-  pointer-events: none;
-  max-height: 0;
-  opacity: 0;
-  transform: translateY(-10px);
-  transition:
-    max-height 0.3s ease-out,
-    opacity 0.3s ease-out,
-    transform 0.3s ease-out;
-}
-
 .controls-menu--help {
   min-width: 400px;
   padding: 20px;
-}
-
-.controls-menu.controls-menu--open {
-  pointer-events: auto;
-  max-height: 200px;
-  opacity: 1;
-  transform: translateY(0);
-}
-.controls-menu--help.controls-menu--open {
-  max-height: 400px;
-}
-
-.controls-icon {
-  display: block;
-  width: 40px;
-  height: 40px;
-  cursor: pointer;
-  margin: 0;
-  padding: 0;
-  background-color: unset;
-  border: none;
 }
 
 .controls-icon__svg {
