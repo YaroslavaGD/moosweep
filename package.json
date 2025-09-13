@@ -9,7 +9,8 @@
     "test": "ng test",
     "lint": "ng lint",
     "lint-fix": "npx eslint \"src/**/*.{js,jsx,ts,tsx,html}\" --quiet --fix",
-    "format": "npx prettier \"src/**/*.{js,jsx,ts,tsx,html,css,scss}\" --write"
+    "format": "npx prettier \"src/**/*.{js,jsx,ts,tsx,html,css,scss}\" --write",
+    "deploy": "ng deploy --base-href=https://yaroslavagd.github.io/moosweep/"
   },
   "private": true,
   "dependencies": {
@@ -37,6 +38,7 @@
     "@types/jasmine": "~5.1.0",
     "@typescript-eslint/eslint-plugin": "7.11.0",
     "@typescript-eslint/parser": "7.11.0",
+    "angular-cli-ghpages": "^2.0.3",
     "eslint": "^8.57.0",
     "eslint-config-airbnb-typescript": "^18.0.0",
     "eslint-config-prettier": "^10.1.5",
