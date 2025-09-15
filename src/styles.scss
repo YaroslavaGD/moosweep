@@ -1,0 +1,64 @@
+@import url('./styles/colors.scss');
+@import url('./styles/vars.scss');
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background-color: var(--board-color);
+  background-image: url(/assets/images/grass_background.png);
+  background-repeat: repeat;
+  background-size: var(--cell-size);
+  background-attachment: fixed;
+  font-family:
+    'Baloo 2', 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.bagel {
+  font-family: 'Bagel Fat One', system-ui;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.baloo-400 {
+  font-family: 'Baloo 2', sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.button {
+  cursor: pointer;
+  font-size: 20px;
+  margin: 5px;
+  padding: 8px 16px;
+  background-color: unset;
+  color: var(--border-color);
+  border: 2px solid var(--border-color);
+  border-radius: 10px;
+  transition:
+    background-color 0.3s ease-out,
+    transform 0.1s ease-in;
+  &:hover {
+    background-color: var(--button-color);
+    border-color: var(--number-color);
+    color: var(--number-color);
+  }
+
+  &:focus {
+    outline: none;
+    background-color: var(--button-color);
+    color: var(--number-color);
+    border-color: var(--number-color);
+    transform: scale(1.05);
+  }
+
+  &:active,
+  &.pressed {
+    transform: scale(0.95);
+    background-color: var(--number-color);
+    color: var(--border-color);
+  }
+}

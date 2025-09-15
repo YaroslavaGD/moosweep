@@ -1,0 +1,27 @@
+<div class="controls">
+  <app-help></app-help>
+  <app-settings></app-settings>
+</div>
+<div class="state bagel">
+  <img class="state__img" src="/assets/images/score.png" alt="" />
+  <span>:&nbsp;{{ currentGrass() }}</span>
+  &nbsp;/&nbsp;
+  <span>{{ totalGrass }}</span>
+</div>
+
+<div class="board">
+  <div class="field">
+    <app-cell *ngFor="let cell of cells()" [cell]="cell"></app-cell>
+  </div>
+  <app-cow
+    [x]="playerPosition()!.x"
+    [y]="playerPosition()!.y"
+    [direction]="direction()!"
+  ></app-cow>
+</div>
+
+<app-alert
+  [open]="dialogOpen()"
+  [result]="gameResult()"
+  (closed)="onDialogClosed()"
+></app-alert>

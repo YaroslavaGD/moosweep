@@ -1,0 +1,37 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: var(--alert-color);
+  z-index: 1000;
+}
+
+.alert {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.8);
+  padding: 20px 60px;
+  border-radius: 12px;
+  text-align: center;
+  color: var(--border-color);
+  z-index: 1100;
+  opacity: 0;
+  transition:
+    transform 0.3s ease,
+    opacity 0.3s ease;
+
+  &.show {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+  }
+
+  img {
+    max-width: 300px;
+    margin-bottom: 15px;
+  }
+
+  .alert__message {
+    max-width: 1000px;
+    font-size: 40px;
+  }
+}

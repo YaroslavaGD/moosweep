@@ -1,0 +1,89 @@
+.controls-menu--help {
+  min-width: 400px;
+  padding: 20px;
+}
+
+.controls-icon__svg {
+  fill: transparent;
+  stroke: transparent;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 1500;
+  stroke-dashoffset: 0;
+}
+
+.controls-icon__svg--out {
+  fill: transparent;
+  stroke: var(--border-color);
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 2px;
+}
+
+.controls-icon:hover .controls-icon__svg {
+  stroke-width: 2px;
+  stroke: var(--number-color);
+  fill: var(--button-color);
+  animation: dash 3s linear;
+}
+
+.controls-icon__svg-question--out {
+  stroke-width: 1px;
+}
+
+.controls-icon:hover .controls-icon__svg-question {
+  stroke-width: 1px;
+  stroke: var(--number-color);
+  fill: var(--button-color);
+  animation: dash 3s linear;
+}
+
+@keyframes dash {
+  from {
+    stroke-dashoffset: 1500;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.help-header {
+  margin-top: 0;
+  font-size: 25px;
+  display: flex;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.help-table {
+  font-size: 16px;
+  text-align: left;
+  margin-bottom: 15px;
+  td:first-child {
+    padding-right: 10px;
+  }
+}
+
+.help-rules {
+  font-size: 16px;
+  text-align: left;
+  line-height: 1.6;
+  padding-left: 20px;
+
+  li {
+    position: relative;
+  }
+}
+
+.help-rules__image {
+  position: absolute;
+  bottom: 0;
+  margin-left: 5px;
+  width: 30px;
+}
+
+.help-image {
+  width: 32px;
+}

@@ -1,0 +1,25 @@
+<div class="cell-background" [class.revealed]="cell.revealed || showMine()">
+  <div
+    class="cell"
+    [class.revealed]="cell.revealed || showMine()"
+    [style.background-position]="backgroundPosition"
+  >
+    <div
+      class="content"
+      [class.content--visible]="!!delayedContent"
+      [class.content--left]="direction()! && direction() === 'left'"
+    >
+      <span class="content__number bagel">
+        {{ delayedContent }}
+      </span>
+    </div>
+    <span class="hint" [class.hint--marked]="displayHint"></span>
+    <span class="border" [class.border--path]="cell.path"></span>
+    <img
+      class="mine"
+      [class.mine--visible]="showMine()"
+      src="/assets/images/poops.png"
+      alt="mine"
+    />
+  </div>
+</div>

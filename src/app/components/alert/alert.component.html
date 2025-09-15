@@ -1,0 +1,25 @@
+<div class="overlay" *ngIf="open">
+  <div class="alert" [class.show]="open">
+    <img *ngIf="result === 'win'" src="assets/images/win.png" alt="You win!" />
+    <p class="alert__message" *ngIf="result === 'win'">
+      You're a true gourmand!
+      <br />
+      Not a single blade of grass left uneaten.
+    </p>
+
+    <img
+      *ngIf="result === 'lose'"
+      src="assets/images/lose.png"
+      alt="You lose!"
+    />
+    <p class="alert__message" *ngIf="result === 'lose'">
+      Your nose failed you…
+      <br />
+      The stink ends your journey.
+    </p>
+
+    <button #closeBtn (click)="onClose()" class="button bagel">
+      Moo Again
+    </button>
+  </div>
+</div>
